@@ -12,8 +12,18 @@
     <label for="maindomains">Main Domains (one per line):</label><br>
     <textarea id="maindomains" rows="10" cols="50"></textarea><br><br>
 
-    <button onclick="compareDomains()">Compare</button><br><br>
 
+	  <button onclick="compareDomains()" class="pushable">
+        <span class="shadow"></span>
+        <span class="edge"></span>
+        <span class="front">
+          Remove subdomains
+        </span>
+    </button>
+
+
+
+    
     <label for="result">Matched Main Domains:</label><br>
     <textarea id="result" rows="10" cols="50" readonly></textarea>
 
