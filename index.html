@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Domain Comparator</title>
+</head>
+<body>
+    <h1>Domain Comparator</h1>
+    <label for="subdomains">Subdomains (one per line):</label><br>
+    <textarea id="subdomains" rows="10" cols="50"></textarea><br><br>
+
+    <label for="maindomains">Main Domains (one per line):</label><br>
+    <textarea id="maindomains" rows="10" cols="50"></textarea><br><br>
+
+    <button onclick="compareDomains()">Compare</button><br><br>
+
+    <label for="result">Matched Main Domains:</label><br>
+    <textarea id="result" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        function compareDomains() {
+            // Get subdomains and main domains from the text areas
+            const subdomainsText = document.getElementById('subdomains').value;
+            const maindomainsText = document.getElementById('maindomains').value;
+
+            // Convert them into arrays
+            const subdomains = subdomainsText.split('\n').map(item => item.trim()).filter(item => item);
+            const maindomains = maindomainsText.split('\n').map(item => item.trim()).filter(item => item);
+
+            // Create a Set to store matched main domains
+            const matchedMainDomains = new Set();
+
+            // Check each main domain against subdomains
+            for (const mainDomain of maindomains) {
+                for (const subdomain of subdomains) {
+                    if (subdomain.endsWith(mainDomain)) {
+                        matchedMainDomains.add(mainDomain);
+                        break; // No need to check further subdomains once a match is found
+                    }
+                }
+            }
+
+            // Convert the Set to a string for display
+            const resultText = Array.from(matchedMainDomains).join('\n');
+
+            // Display the result in the result text area
+            document.getElementById('result').value = resultText;
+        }
+    </script>
+</body>
+</html>
